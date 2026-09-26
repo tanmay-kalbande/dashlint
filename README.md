@@ -59,7 +59,7 @@ the hosted server instead — no cloning needed:
 {
   "mcpServers": {
     "dashlint": {
-      "url": "https://dashlint.vercel.app/mcp"
+      "url": "https://dashlint.tanmaysk.in/mcp"
     }
   }
 }
