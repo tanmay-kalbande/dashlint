@@ -87,6 +87,6 @@ scrolls or drills down.
 
 ## Empty, Loading & Error States
 
-- **R-STATE-01**: <!-- TODO: Awaiting user input --> Loading charts show `TODO — describe loading treatment (skeleton screens? shimmer? count-up only?)`.
-- **R-STATE-02**: <!-- TODO: Awaiting user input --> Empty state (no data) shows `TODO — describe what appears when a view has no data`.
-- **R-STATE-03**: <!-- TODO: Awaiting user input --> Error state displays `TODO — inline message? toast? fallback card?`.
+- **R-STATE-01 (Loading UI)**: Use skeleton screens shaped like the actual chart (e.g., bar-shaped bars, flat line for a line chart), not a generic spinner. Spinners cause jarring pop-ins; shape-matching skeletons keep the layout stable and look more engineered. For KPI cards, use a pulsing/blurred placeholder for the number, then use the AnimatedNumber count-up firing once real data lands, bridging the loading and loaded states into one animation system.
+- **R-STATE-02 (Empty States)**: Keep the chart shell (axes, grid, card frame) visible and centered, and overlay a short, specific message (e.g., "No incidents in this range") instead of a decorative illustration or collapsing the card. Layout stability across states is critical; big illustrations visually compete with surrounding data. Always hint at active filters in the copy if applicable.
+- **R-STATE-03 (Error States)**: Errors must be per-card isolated, not a page-level crash. One failed fetch out of six should show only that card in a "Failed to load — Retry" state (inline, matching the loaded footprint) while the rest of the dashboard remains interactive. This enforces an architecture where charts fetch independently rather than using a single shared page-level query.
