@@ -34,10 +34,14 @@ Activate DashLint when the user is:
 
 1. **Read [reference.md](./reference.md)** for the full rulebook — it
    contains every design rule with its ID (e.g., `R-CHART-01`).
-2. When generating dashboard code, **check each output** against the
-   applicable rules before presenting to the user.
-3. If a rule is violated, **cite the rule ID** and show the corrected version.
-4. Rules are **data-driven defaults, not hard bans** — if the data context
+2. **Profile your data** — identify field types, cardinalities, and roles.
+3. **Call `plan_dashboard`** with the data profile to get layout and chart
+   type recommendations before writing any code.
+4. **Build to the plan** — implement the recommended sections and chart types.
+5. **Call `validate_dashboard_spec`** as a final check against the full
+   rulebook. Fix any violations before shipping.
+6. If a rule is violated, **cite the rule ID** and show the corrected version.
+7. Rules are **data-driven defaults, not hard bans** — if the data context
    genuinely warrants an exception, state the exception and the reasoning.
 
 ## Rule categories
@@ -51,6 +55,7 @@ Activate DashLint when the user is:
 | `R-LAYOUT-*`  | Layout hierarchy & grid         | 18    |
 | `R-INTERACT-*`| Interaction patterns            | 3     |
 | `R-STATE-*`   | Empty / loading / error states  | 3     |
+| `R-INSIGHT-*` | Insight presentation           | 5     |
 
 ## Quick reference — check these first
 
@@ -64,3 +69,5 @@ Activate DashLint when the user is:
 8. **`R-COLOR-04`**: Same category → same color position across all charts.
 9. **`R-CHART-07`**: Dual-axis charts are a default-avoid.
 10. **`R-LAYOUT-12`**: Drill-down drawers slide from the right, width `min(520px, 92vw)`.
+11. **`R-INSIGHT-01`**: Chart titles must state a finding, not describe an axis.
+12. **`R-INSIGHT-03`**: Estimates/forecasts must show uncertainty ranges.
