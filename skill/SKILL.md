@@ -35,9 +35,10 @@ Activate DashLint when the user is:
 1. **Read [reference.md](./reference.md)** for the full rulebook — it
    contains every design rule with its ID (e.g., `R-CHART-01`).
 2. **Profile your data** — identify field types, cardinalities, and roles.
-3. **Call `plan_dashboard`** with the data profile to get layout and chart
+3. **Call `list_design_systems`** and **`get_design_system`** to pick a named visual identity.
+4. **Call `plan_dashboard`** with the data profile to get layout and chart
    type recommendations before writing any code.
-4. **Build to the plan** — implement the recommended sections and chart types.
+5. **Build to the plan** — implement the recommended sections and chart types.
 5. **Call `validate_dashboard_spec`** as a final check against the full
    rulebook. Fix any violations before shipping.
 6. If a rule is violated, **cite the rule ID** and show the corrected version.
@@ -52,10 +53,11 @@ Activate DashLint when the user is:
 | `R-SPACE-*`   | Spacing & sizing                | 4     |
 | `R-TYPE-*`    | Typography                      | 4     |
 | `R-CHART-*`   | Chart selection & configuration | 10    |
-| `R-LAYOUT-*`  | Layout hierarchy & grid         | 18    |
+| `R-LAYOUT-*`  | Layout hierarchy & grid         | 19    |
 | `R-INTERACT-*`| Interaction patterns            | 3     |
 | `R-STATE-*`   | Empty / loading / error states  | 3     |
 | `R-INSIGHT-*` | Insight presentation           | 5     |
+| `R-DESIGN-*`  | Design system consistency       | 3     |
 
 ## Quick reference — check these first
 
