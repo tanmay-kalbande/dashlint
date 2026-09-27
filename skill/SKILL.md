@@ -35,14 +35,16 @@ Activate DashLint when the user is:
 1. **Read [reference.md](./reference.md)** for the full rulebook — it
    contains every design rule with its ID (e.g., `R-CHART-01`).
 2. **Profile your data** — identify field types, cardinalities, and roles.
-3. **Call `list_design_systems`** and **`get_design_system`** to pick a named visual identity.
-4. **Call `plan_dashboard`** with the data profile to get layout and chart
+3. **Present styles & require user approval** — Call `list_design_systems` to get available visual identities.
+   **MANDATORY USER APPROVAL**: Present 2–3 matching options (with personality, colors, typography, and best-for use cases) to the user. You must pause and receive explicit user approval/selection on the style before writing code or selecting tokens. Never assume a default style without user confirmation.
+4. **Get approved tokens** — Call `get_design_system` with the user's approved design system ID.
+5. **Call `plan_dashboard`** with the data profile to get layout and chart
    type recommendations before writing any code.
-5. **Build to the plan** — implement the recommended sections and chart types.
-5. **Call `validate_dashboard_spec`** as a final check against the full
+6. **Build to the plan** — implement the recommended sections and chart types using the approved design system tokens.
+7. **Call `validate_dashboard_spec`** as a final check against the full
    rulebook. Fix any violations before shipping.
-6. If a rule is violated, **cite the rule ID** and show the corrected version.
-7. Rules are **data-driven defaults, not hard bans** — if the data context
+8. If a rule is violated, **cite the rule ID** and show the corrected version.
+9. Rules are **data-driven defaults, not hard bans** — if the data context
    genuinely warrants an exception, state the exception and the reasoning.
 
 ## Rule categories

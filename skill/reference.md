@@ -427,11 +427,15 @@ This layer adds a visual aesthetic check on top of the existing structural/corre
 
 Call `list_design_systems()` to see options, `get_design_system(id)` for full tokens, then pass `designSystem` in your spec to validate against it.
 
+> **MANDATORY USER APPROVAL**: Before implementing a dashboard or choosing colors/typography, the AI assistant must present the recommended design systems to the user and receive explicit approval. Do NOT silently default to any style without user confirmation.
+
 ## Rules
 
 - **R-DESIGN-01 (Chart Colors Consistent)**: Every hex in `colors.chartColors` must appear in that system's token palette. (Error if not)
 - **R-DESIGN-02 (Background/Surface Match)**: `colors.background` and `surfaceColor` must match that system's declared bg/surface tokens. (Warning if not — flags it, doesn't hard-fail on minor tint variants)
 - **R-DESIGN-03 (Typography Stack Match)**: `typography.fontFamily` must match one of that system's declared font stacks. (Warning if not)
+- **R-DESIGN-04 (Mandatory User Approval)**: The visual style and design system must be explicitly approved by the user before code generation. An AI assistant must never assume or silently apply a default style without user confirmation.
+
 
 ---
 # Layout Updates
