@@ -7,9 +7,10 @@
 
 ## Page-Level Hierarchy
 
-Every dashboard follows an inverted-pyramid reading order. The most
-summarized information is at the top; detail increases as the user
-scrolls or drills down.
+Many dashboards benefit from an inverted-pyramid reading order: a useful
+summary appears early, with supporting detail later in the page or available
+through navigation. The example below is one common structure, not a required
+shell; adapt it to the task and host application.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -36,38 +37,38 @@ scrolls or drills down.
 
 ### Visual Weight & Reading Order
 
-- **R-LAYOUT-01**: **KPI summary cards are always positioned above charts.** This is standard inverted-pyramid information hierarchy — the most aggregated data appears first. Hard rule.
-- **R-LAYOUT-02**: Filter strip sits **above** the tab navigation — filters apply globally across tabs and should be visible before any tab content.
-- **R-LAYOUT-03**: The most critical metric occupies the **first (leftmost) KPI card** position. Reading order is left-to-right, top-to-bottom.
+- **R-LAYOUT-01**: Put the decision-relevant summary before supporting detail when that order serves the task. KPIs often belong above charts, but a map, alert, or primary workflow may deserve the lead position.
+- **R-LAYOUT-02**: When filters apply globally across tabs, place them where users can find them before or alongside navigation. Local filters belong with the view they affect.
+- **R-LAYOUT-03**: Give the most critical metric or action the strongest and earliest visual position; do not require a KPI row when KPIs are not central.
 
 ### Sidebar / Nav Rail
 
-- **R-LAYOUT-04**: A **persistent nav rail, visually distinct from the content area**, is the structural rule. It houses navigation, dataset indicators, and summary metrics. Width range: **240–280px**.
-- **R-LAYOUT-05**: The sidebar uses a **visually distinct treatment** (dark background is the default convention; light with strong border is also acceptable) to create clear separation from the data workspace.
+- **R-LAYOUT-04**: Use persistent navigation when the number of views or need for persistent context justifies it. A header, top nav, or focused single-view layout may be more appropriate. If used, a rail around 240–280px is a reference range, not a requirement.
+- **R-LAYOUT-05**: If a sidebar is used, distinguish it from the workspace with contrast, spacing, or a border. A dark background is one option, not the default mandate.
 
 ### Grid System
 
-- **R-LAYOUT-06**: Dashboard workspace uses an **asymmetric two-column grid** — the primary panel is wider than the supporting panel. The principle is that the main analytical view gets more space; the exact ratio is flexible.
-- **R-LAYOUT-07**: Grid gap between dashboard cards is `12px`. App canvas padding is `12px`.
-- **R-LAYOUT-08**: **Minimum chart height is 180–200px.** Charts compressed below this threshold become unreadable — axis labels overlap, data points collide, and patterns vanish. This is a common AI-generated-layout failure.
+- **R-LAYOUT-06**: Use asymmetric columns when one view deserves more space; choose one- or multi-column layouts based on content and viewport.
+- **R-LAYOUT-07**: Keep card gaps and canvas padding consistent with the active spacing scale. `12px` is a useful reference value.
+- **R-LAYOUT-08**: Give charts enough space for their marks and labels to remain readable. Around 180–200px is a useful starting point for many charts, not a universal minimum; small sparklines and compact charts are valid when detail is not required.
 
 ### Responsive Behavior
 
-- **R-LAYOUT-09**: At approximately **900–960px viewport width**, the grid collapses to a single column. Don't hard-code a single breakpoint — test with your actual content.
-- **R-LAYOUT-10**: When the sidebar can't fit alongside content, it collapses to a top nav bar or a hamburger-triggered overlay — never hidden entirely.
+- **R-LAYOUT-09**: Collapse columns when the actual content no longer fits comfortably. Around 900–960px is a useful starting range, not a fixed breakpoint.
+- **R-LAYOUT-10**: When a sidebar cannot fit, reflow or collapse navigation accessibly. Do not strand users without access to needed views.
 - **R-LAYOUT-11**: Charts below minimum readable width should switch to a simplified view (fewer tick marks, hidden axis labels) rather than simply scaling down.
 
 ### Drawers & Overlays
 
-- **R-LAYOUT-12**: Drill-down drawers slide from the **right**. Default width: `min(520px, 92vw)`.
+- **R-LAYOUT-12**: When a slide drawer fits the drill-down task, opening from the right with width near `min(520px, 92vw)` is a useful default.
 - **R-LAYOUT-13**: **Full-screen overlays** are for spatial or sustained-focus tasks with their own toolbar — geographic maps, multi-view analysis studios, flow network visualizations. Use them for work that needs its own dedicated context.
 - **R-LAYOUT-14**: **Slide drawers** are for quick drill-downs that shouldn't lose the surrounding dashboard context — clicking a data point to see its details, inspecting a specific incident or agent.
-- **R-LAYOUT-15**: Overlay backdrop uses the dark theme palette (`--surface: #151515`). Drawers use the main theme palette.
+- **R-LAYOUT-15**: Keep overlays visually distinct and readable against the host theme. A dark backdrop with a light drawer is one reference pattern.
 
 ### Tab Navigation
 
-- **R-LAYOUT-16**: Tabs use a **segmented track** pattern (height: `34px`, inner gap: `4px`). Active tab is visually elevated (white surface card with subtle drop shadow).
-- **R-LAYOUT-17**: All tab panels are rendered simultaneously and toggled via `display: none` — this preserves scroll positions, chart dimensions, and component state across tab switches. Never unmount tab content.
+- **R-LAYOUT-16**: When tabs are appropriate, a segmented track (around 34px high) is one compact option. Make the active view clear and keyboard accessible.
+- **R-LAYOUT-17**: Keep tab state and scroll position stable where practical. Rendering all hidden panels is optional; lazily render expensive views when that improves performance and preserves expected behavior.
 
 ---
 
@@ -81,13 +82,13 @@ scrolls or drills down.
 
 ## Viewport & Scroll Policy
 
-- **R-LAYOUT-18**: The viewport shell is **100vh × 100vw with `overflow: hidden`** on the outer container. Outer page-level scrolling is forbidden in a dashboard — all scroll activity is confined to individual panels, tables, or drawer bodies with custom scrollbars (`5px` width, `4px` thumb radius).
+- **R-LAYOUT-18**: Prevent accidental clipping and horizontal overflow, but allow natural page/content scrolling when needed for readable analysis. Contain scrolling inside tables, drawers, or panels only when it improves usability. A fixed 100vh × 100vw frame is an optional host-app pattern, not a universal dashboard rule.
 
 ---
 
 ## Empty, Loading & Error States
 
-- **R-STATE-01 (Loading UI)**: Use skeleton screens shaped like the actual chart (e.g., bar-shaped bars, flat line for a line chart), not a generic spinner. Spinners cause jarring pop-ins; shape-matching skeletons keep the layout stable and look more engineered. For KPI cards, use a pulsing/blurred placeholder for the number, then use the AnimatedNumber count-up firing once real data lands, bridging the loading and loaded states into one animation system.
+- **R-STATE-01 (Loading UI)**: Prefer a stable, task-shaped loading state over a long blocking spinner. Animate KPI changes only when useful and respect reduced-motion preferences.
 - **R-STATE-02 (Empty States)**: Keep the chart shell (axes, grid, card frame) visible and centered, and overlay a short, specific message (e.g., "No incidents in this range") instead of a decorative illustration or collapsing the card. Layout stability across states is critical; big illustrations visually compete with surrounding data. Always hint at active filters in the copy if applicable.
-- **R-STATE-03 (Error States)**: Errors must be per-card isolated, not a page-level crash. One failed fetch out of six should show only that card in a "Failed to load — Retry" state (inline, matching the loaded footprint) while the rest of the dashboard remains interactive. This enforces an architecture where charts fetch independently rather than using a single shared page-level query.
-- **R-LAYOUT-11 (Sidebar Necessity)**: A full sidebar may be more chrome than this dashboard needs. If the layout has a sidebar but 2 or fewer views and no persistent filters, it usually fits a header/top-bar just as well. This is a recommendation, not a hard error.
+- **R-STATE-03 (Error States)**: Show actionable errors without crashing unrelated views. Isolate a failed data source or panel when it can fail independently; for a local file parse failure, report the problem and keep the upload/recovery path available.
+- **R-LAYOUT-19 (Sidebar Necessity)**: A full sidebar may be more chrome than this dashboard needs. If there are few views and no persistent context, a header or top bar may fit better. This is a recommendation, not a hard error.

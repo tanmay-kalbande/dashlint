@@ -1,13 +1,11 @@
 # Design Systems
 
-This layer adds a visual aesthetic check on top of the existing structural/correctness rules. DashLint does not judge whether a design is "good" or "beautiful," but rather whether the dashboard spec is internally consistent with a chosen visual identity.
-
-Call `list_design_systems()` to see options, `get_design_system(id)` for full tokens, then pass `designSystem` in your spec to validate against it.
+This layer describes how to keep a selected visual identity internally consistent. DashLint MCP currently provides optional reference tokens and design guidance; it does not expose `list_design_systems`, `get_design_system`, or a design-system validator. Preserve an existing product system when available. For a new dashboard, use one coherent palette and type/spacing scale; selection can be made from the user's brief and references without a separate approval step.
 
 ## Rules
 
-- **R-DESIGN-01 (Chart Colors Consistent)**: Every hex in `colors.chartColors` must appear in that system's token palette. (Error if not)
-- **R-DESIGN-02 (Background/Surface Match)**: `colors.background` and `surfaceColor` must match that system's declared bg/surface tokens. (Warning if not — flags it, doesn't hard-fail on minor tint variants)
-- **R-DESIGN-03 (Typography Stack Match)**: `typography.fontFamily` must match one of that system's declared font stacks. (Warning if not)
-- **R-DESIGN-04 (Mandatory User Approval)**: The visual style and design system must be explicitly approved by the user before code generation. An AI assistant must never assume or silently apply a default style without user confirmation.
+- **R-DESIGN-01 (Chart Colors Consistent)**: Keep chart colors within the chosen palette and map the same category consistently across views.
+- **R-DESIGN-02 (Background/Surface Match)**: Use background and surface colors that belong to the same visual system, with enough contrast for text and chart marks.
+- **R-DESIGN-03 (Typography Stack Match)**: Use a consistent type system for headings, labels, body copy, and numeric values; preserve the host app's fonts when present.
+- **R-DESIGN-04 (Contextual Style Choice)**: Match an existing product style when extending it. In a new dashboard, choose a sensible coherent default and continue unless the user's preference is materially ambiguous; do not block implementation for routine token choices.
 

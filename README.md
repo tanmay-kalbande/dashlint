@@ -12,9 +12,9 @@ DashLint is an open **rulebook** that any AI coding assistant can read
 automatically. It teaches the assistant how to build dashboards that look
 like a human designer made them — not like an AI's first draft.
 
-**46 rules** across 7 categories, every one derived from decisions made in
-production React analytics dashboards (incident management &
-contact-center SLA).
+The rulebook covers chart selection, layout, colors, typography, interactions,
+loading/error states, and insight presentation, drawing on production React
+analytics dashboards (incident management and contact-center SLA).
 
 | Category       | Prefix         | What it covers |
 |----------------|----------------|----------------|
@@ -74,6 +74,7 @@ the server source.
 rulebook/                       ← Single source of truth
   design-tokens.md              ← Color / spacing / typography system
   chart-selection-rules.md      ← Data shape → chart type mapping
+  chart-rendering.md            ← Reusable chart geometry guidance
   layout-hierarchy-rules.md     ← Information hierarchy rules
   examples.md                   ← Before / after examples
 

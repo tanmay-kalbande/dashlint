@@ -80,7 +80,7 @@ color everywhere it appears across the dashboard. Consistency builds trust.
 
 - **R-COLOR-01**: Cap distinct hues at **6–8 when the viewer must cross-reference a legend**. Up to 14 colors is acceptable only when categories are directly labeled on or next to the chart, not legend-dependent.
 - **R-COLOR-02**: Status colors (`--ok`, `--warn`, `--err`) must pass WCAG AA contrast (4.5:1) against `--surface`. Color is never decorative — red is reserved for critical/breach states, green for positive/met states, amber for warnings.
-- **R-COLOR-03**: Chart backgrounds must be transparent or match `--bg-surface` — never hardcoded white `#ffffff`.
+- **R-COLOR-03**: Chart backgrounds should be transparent or use the active system's canvas/surface token; avoid a hardcoded white background that conflicts with the surrounding theme.
 - **R-COLOR-04**: The same category must map to the same palette position across every chart on the dashboard. Use the ordered categorical palette, not random color assignment.
 
 ---

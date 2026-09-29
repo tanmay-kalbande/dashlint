@@ -1,80 +1,61 @@
 # Before / After Examples — DashLint Rulebook
 
-> Real scenarios showing what a rule violation looks like and how the
-> correct version differs. These are the rulebook's most effective
-> teaching tool — more useful than any abstract rule.
+> Illustrative scenarios showing common violations and context-aware fixes.
+> Adapt them to the actual data and user's task.
 
 ---
 
-<!-- TODO: Awaiting user input for Q36 — 2–3 real situations where an AI
-     assistant (or early design iteration) made a bad dashboard call that
-     was then corrected. Examples should follow the format below. -->
+## Example 1: Too many categories in a pie chart
 
-## Example 1: TODO — Needs Real Project Story
+### ❌ Before (R-CHART-01)
 
-### ❌ Before (violates R-???-??)
+A pie chart shows twelve incident categories. Small slices are difficult to
+compare, and the legend forces repeated eye travel.
 
-```
-TODO: Describe the actual bad design choice that was made.
-      e.g., "Claude generated a pie chart with 12 category slices
-      for incident classification data."
-```
+### ✅ After
 
-### ✅ After (correct)
-
-```
-TODO: Describe what you changed it to and why.
-      e.g., "Replaced with a horizontal bar chart showing top 8
-      categories with an 'Other' group. Comparison by bar length
-      is far more accurate than comparing pie slice angles."
-```
+Use a sorted horizontal bar chart for the most important categories, with a
+meaningful "Other" group when the long tail can be combined. Keep counts and
+the denominator visible. If every category matters, use a searchable table.
 
 **Rules applied**: `R-CHART-01`, `R-CHART-04`
 
 ---
 
-## Example 2: TODO — Needs Real Project Story
+## Example 2: A no-scroll rule makes charts unreadable
 
-### ❌ Before (violates R-???-??)
+### ❌ Before (R-LAYOUT-18)
 
-```
-TODO: Another real before/after.
-      e.g., "KPI cards were initially placed below the main charts"
-      or "Status colors were random hex values, not semantic"
-```
+Several useful views are squeezed into one viewport. Charts become too small,
+labels are truncated, and the detail table is hidden behind extra controls.
 
-### ✅ After (correct)
+### ✅ After
 
-```
-TODO
-```
+Keep a concise summary near the top, then let the page scroll naturally. Use
+tabs, drawers, or overlays only when they help users switch tasks or inspect
+details. Do not remove useful evidence just to avoid scrolling.
 
-**Rules applied**: `TODO`
+**Rules applied**: `R-LAYOUT-06`, `R-LAYOUT-08`, `R-LAYOUT-18`
 
 ---
 
-## Example 3: TODO — Needs Real Project Story
+## Example 3: A date field triggers an unnecessary calendar suite
 
-### ❌ Before (violates R-???-??)
+### ❌ Before (R-LAYOUT-18)
 
-```
-TODO: A third real example.
-      e.g., "Chart used stock Recharts defaults with auto-generated
-      axis ticks, generic tooltip, and the default color palette"
-```
+The source contains a date column, so the dashboard adds day/week/month
+switches, monthly cards, a calendar, a date drawer, and multiple exports even
+though the user only asked for an overall comparison.
 
-### ✅ After (correct)
+### ✅ After
 
-```
-TODO
-```
+Check whether the date is meaningful, what its grain and coverage are, and
+whether time patterns answer the question. If not, omit the temporal suite. If
+time matters, add the simplest useful trend or period comparison first.
 
-**Rules applied**: `TODO`
+**Rules applied**: `R-CHART-02`, `R-LAYOUT-18`
 
 ---
 
-> **Note to rulebook consumer**: These examples are the most valuable part of
-> the rulebook — they show exactly what "wrong" looks like in practice, not
-> just what "right" looks like in theory. When you see a pattern in your
-> generated dashboard that matches a "Before" example, apply the fix shown
-> in the corresponding "After".
+> These scenarios illustrate tradeoffs, not rigid prescriptions. Apply the
+> reasoning when the data and task match.
