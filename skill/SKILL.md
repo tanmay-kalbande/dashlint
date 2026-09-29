@@ -32,13 +32,13 @@ Activate DashLint when the user is:
 
 ## How to use
 
-1. **Read [reference.md](./reference.md)** for the full rulebook — it
-   contains every design rule with its ID (e.g., `R-CHART-01`).
-2. **Profile your data** — identify field types, cardinalities, and roles.
-3. **Choose the visual system** — Preserve the user's existing product system when working in an app. For a new dashboard, select a coherent reference or brand direction using judgment; ask only when the user's preference materially affects the result. This MCP does not expose design-system listing, planning, or validation tools.
-4. **Build for the task** — treat chart, layout, color, and component patterns as reasoned defaults. The MCP's blueprint tool accepts field metadata only; it does not inspect rows, generate code, or validate a rendered dashboard.
-5. **Review the result** — use `get_dashboard_completion_checklist()` when connected to the DashLint MCP. Otherwise review against the relevant rules in `reference.md`.
-6. If a rule is violated, explain the issue and apply a context-appropriate fix. Rules are **data-driven defaults, not hard bans**; preserve readability, accessibility, and truthful data presentation when making an exception.
+1. **Choose the deliverable** — infer whether the user wants analysis only, a change inside an existing app, or a new standalone dashboard. If connected to the MCP, call `get_dashboard_creation_workflow(mode)` and use it as the workflow source of truth. Do not turn analysis-only requests into apps or existing-app changes into separate HTML files by default.
+2. **Load relevant rules only** — use the quick reference below and read only the relevant sections of [reference.md](./reference.md). Load the full rulebook only for a comprehensive audit or when the task needs it.
+3. **Profile your data** — identify field types, cardinalities, grain, and likely roles locally. Never send rows or sample values to DashLint MCP.
+4. **Choose the visual system** — preserve the user's existing product system when working in an app. For a new dashboard, select a coherent reference or brand direction using judgment; ask only when the user's preference materially affects the result.
+5. **Build for the task** — treat chart, layout, color, and component patterns as reasoned defaults. Include only file formats the task needs; reuse project dependencies or package large vendor libraries as local assets instead of pasting minified library source into generated code or chat unless a single-file offline artifact is required. The MCP's blueprint tool accepts field metadata only; it does not inspect rows, generate code, or validate a rendered dashboard.
+6. **Review the result** — pass the selected mode to `get_dashboard_completion_checklist(mode)` when connected to the DashLint MCP. Otherwise review against the relevant rules in `reference.md`.
+7. If a rule is violated, explain the issue and apply a context-appropriate fix. Rules are **data-driven defaults, not hard bans**; preserve readability, accessibility, and truthful data presentation when making an exception.
 
 ## Rule categories
 
